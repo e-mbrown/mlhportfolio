@@ -9,7 +9,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"))
+# Temporary images. TODO replace with actual images.
+    photos = ['David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg']
+    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), photos=photos)
 
 @app.route('/resume')
 def resume():

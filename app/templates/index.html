@@ -16,7 +16,7 @@
 
     <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
-    <title>{{ title }}</title>
+    <title>{% block title %}Portfolio{% endblock %}</title>
 </head>
 
 <body>
@@ -30,11 +30,16 @@
         </div>
     </header>
 
-    <div class="profile">
-        <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
+    <main>
+        {% block content %}
+        <div class="photos-wrapper">
+            <div class="photos">
+                {% for photo in photos %}
+                <img src="{{ url_for('static', filename='img/' + photo) }}" alt="Photo {{ loop.index }}" />
+                {% endfor %}
+            </div>
         </div>
-        <h1>{{ title }}</h1>
-    </div>
+        {% endblock %}
+    </main>
 </body>
 </html>
