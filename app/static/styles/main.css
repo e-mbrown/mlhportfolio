@@ -95,3 +95,26 @@ body {
     font-size: 50px;
     font-weight: 700;
 }
+
+.photos-wrapper {
+    overflow-x: auto;
+    padding: 1rem;
+    /* Smooth scrolling for mobile */
+    -webkit-overflow-scrolling: touch;
+}
+
+.photos {
+    display: flex;
+    gap: clamp(8px, 2vw, 24px);
+    /* Center photos when screen is wide enough; 
+        Start them to the left when they overflow.
+    */
+    justify-content: start;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.photos img {
+    height: 200px;
+    width: auto;
+}
