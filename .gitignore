@@ -5,3 +5,10 @@ __pycache__
 python3-virtualenv
 flask.sqlite
 .DS_Store
+
+
+lib/
+lib64
+bin/
+
+portvenv

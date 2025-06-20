@@ -1,0 +1,46 @@
+h1, h3, h4 {
+    margin-bottom: 1%;
+}
+
+ul {
+    margin: 0;
+}
+
+.b {
+    font-weight: bold;
+}
+
+.i {
+    font-style: italic;
+}
+
+.work {
+    margin: 1%;
+}
+
+.head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.pos {
+    grid-area: position
+}
+
+.date {
+    grid-area: dates;
+    text-align: end;
+}
+
+.desc {
+    grid-area: desc
+}
+.exp {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: auto; 
+    grid-template-areas:
+    "position . dates"
+    "desc desc desc";
+}
