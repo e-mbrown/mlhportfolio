@@ -32,13 +32,21 @@
 
     <main>
         {% block content %}
-        <div class="photos-wrapper">
+        <section class="photos-wrapper">
             <div class="photos">
                 {% for photo in photos %}
                 <img src="{{ url_for('static', filename='img/' + photo) }}" alt="Photo {{ loop.index }}" />
                 {% endfor %}
             </div>
-        </div>
+        </section>
+        <section class="about-container">
+            {% for about in abouts %}
+                <div class="about">
+                    <h2>{{ about.title }}</h2>
+                    <p>{{ about.description }}</p>
+                </div>
+            {% endfor %}
+        </section>
         {% endblock %}
     </main>
 </body>
