@@ -44,15 +44,16 @@
                 {% endfor %}
             </div>
         </section>
-        <div id="map">
-            <!-- Inject locations into global JS variable -->
-            <script>
-                window.MAP_LOCATIONS = {{ locations | tojson }};
-            </script>
-
-            <!-- Now load your separated JS file -->
-            <script src="{{ url_for('static', filename='map.js') }}"></script>
-        </div>
+        <section class="map-wrapper">
+            <h1>Where we've been</h1>
+            <div id="map">
+                <!-- Inject location data -->
+                <script>
+                    window.MAP_LOCATIONS = {{ locations | tojson }};
+                </script>
+                <script src="{{ url_for('static', filename='map.js') }}"></script>
+            </div>
+        </section>
         {% endblock %}
     </main>
 </body>
