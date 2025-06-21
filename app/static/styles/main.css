@@ -37,7 +37,7 @@ body {
     justify-content: center;
 }
 
-.nav-logo, img {
+.nav-logo img {
     width: 200px;
 }
 
@@ -56,13 +56,13 @@ body {
     margin-bottom: 50px;
 }
 
-.profile, h1 {
+.profile h1 {
         font-size: 50px;
         font-weight: 700;
         color: white;
 }
 
-.profile, img {
+.profile {
         border-radius: 50%;
         max-width: 100%;
         max-height: 100%;
@@ -114,7 +114,7 @@ body {
     margin: 0 auto;
 }
 
-.photos, img {
+.photos img, .hobby img {
     height: 200px;
     width: auto;
 }
@@ -131,6 +131,7 @@ body {
     width: 40vw;
     min-height: 250px;
     min-width: 400px;
+}
 
 .about-container, .hobby-container {
     display: flex;
@@ -147,4 +148,18 @@ body {
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: inset 0 -2px 0 #78b2e1b3;
+}
+
+.menu-list {
+    list-style: none;
+}
+.inlineflex {
+    display: inline-flex;
 }
