@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-# Temporary images. TODO replace with actual images.
+    # Temporary images. TODO replace with actual images.
     photos = ['David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg']
     # TODO fill in actual about sections.
     abouts = [
@@ -27,3 +27,7 @@ def index():
 @app.route('/resume')
 def resume():
     return render_template('resume.html', title="Work Experience", exp=testdata.workData, edu=testdata.schoolData, url=os.getenv("URL"))
+
+@app.route('/hobbies')
+def hobbies():
+    return render_template('hobbies.html', title="Hobbies", hobbies=testdata.hobbiesData)
