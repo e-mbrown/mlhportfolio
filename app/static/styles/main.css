@@ -118,3 +118,7 @@ body {
     height: 200px;
     width: auto;
 }
+
+#map {
+    height: 300px;
+}
