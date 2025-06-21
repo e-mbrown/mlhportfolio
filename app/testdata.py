@@ -35,3 +35,9 @@ schoolData = [
     {"name":"Lorem", "degree":"BFA, XXX", "date":"May 1990" },
     {"name":"Ipsum", "degree":"MFA, XXX", "date":"May 1990" }
 ]
+
+hobbiesData = [
+    {"img": "hobbies.jpg", "name":"Lorem", "desc":"Aenean eu malesuada dui. Fusce non dignissim ante. Ut et maximus nulla. Mauris sed nulla leo."},
+    {"img": "hobbies.jpg", "name":"Ipsum", "desc":"Nam dapibus, diam vestibulum pretium vestibulum, arcu velit suscipit turpis, sagittis vestibulum arcu lorem vitae mauris."},
+    {"img": "hobbies.jpg", "name":"Dolor", "desc":"Pellentesque ac turpis sit amet magna commodo vestibulum a in mauris."}
+]

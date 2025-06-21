@@ -37,7 +37,7 @@ body {
     justify-content: center;
 }
 
-.nav-logo img {
+.nav-logo, img {
     width: 200px;
 }
 
@@ -56,13 +56,13 @@ body {
     margin-bottom: 50px;
 }
 
-.profile h1 {
+.profile, h1 {
         font-size: 50px;
         font-weight: 700;
         color: white;
 }
 
-.profile img {
+.profile, img {
         border-radius: 50%;
         max-width: 100%;
         max-height: 100%;
@@ -114,7 +114,7 @@ body {
     margin: 0 auto;
 }
 
-.photos img {
+.photos, img {
     height: 200px;
     width: auto;
 }
@@ -131,4 +131,20 @@ body {
     width: 40vw;
     min-height: 250px;
     min-width: 400px;
+
+.about-container, .hobby-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.about, .hobby {
+    flex: 1 1 300px;
+    max-width: 500px;
+    background-color: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

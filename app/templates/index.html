@@ -44,6 +44,14 @@
                 {% endfor %}
             </div>
         </section>
+          <section class="about-container">
+            {% for about in abouts %}
+                <div class="about">
+                    <h2>{{ about.title }}</h2>
+                    <p>{{ about.description }}</p>
+                </div>
+            {% endfor %}
+        </section>
         <section class="map-wrapper">
             <h1>Where we've been</h1>
             <div id="map">
@@ -53,7 +61,6 @@
                 </script>
                 <script src="{{ url_for('static', filename='map.js') }}"></script>
             </div>
-        </section>
         {% endblock %}
     </main>
 </body>
