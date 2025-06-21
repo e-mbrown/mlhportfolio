@@ -16,6 +16,11 @@
 
     <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+   
     <title>{% block title %}Portfolio{% endblock %}</title>
 </head>
 
@@ -39,7 +44,7 @@
                 {% endfor %}
             </div>
         </section>
-        <section class="about-container">
+          <section class="about-container">
             {% for about in abouts %}
                 <div class="about">
                     <h2>{{ about.title }}</h2>
@@ -47,6 +52,15 @@
                 </div>
             {% endfor %}
         </section>
+        <section class="map-wrapper">
+            <h1>Where we've been</h1>
+            <div id="map">
+                <!-- Inject location data -->
+                <script>
+                    window.MAP_LOCATIONS = {{ locations | tojson }};
+                </script>
+                <script src="{{ url_for('static', filename='map.js') }}"></script>
+            </div>
         {% endblock %}
     </main>
 </body>

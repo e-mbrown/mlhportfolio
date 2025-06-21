@@ -119,6 +119,19 @@ body {
     width: auto;
 }
 
+.map-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#map {
+    height: 25vw;
+    width: 40vw;
+    min-height: 250px;
+    min-width: 400px;
+
 .about-container, .hobby-container {
     display: flex;
     flex-wrap: wrap;
