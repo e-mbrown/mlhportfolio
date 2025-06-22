@@ -17,6 +17,7 @@
     <title>{{ title }}</title>
 </head>
 <body>
+    {% import 'macro.jinja' as ml %}
    <header class="nav-bar">
         <div class="nav-content">
             <a href="/">
@@ -25,19 +26,8 @@
                 </div>
             </a>
         </div>
+        {{ml.menu()}}
     </header> 
-
-    {% macro position(name, sdate, edate, desc)%}
-        <div class="exp">
-            <p class="pos b">{{name}}</p>
-            <p class="date i">{{sdate}} - {{edate}}</p>
-            <ul class="desc">
-                {% for bp in desc%}
-                    <li>{{bp}}</li>
-                {% endfor %}
-            </ul> 
-        </div>
-    {% endmacro %}
 
     <div class="work">
         <h1> Experience </h1>
@@ -48,7 +38,7 @@
             </div>
                 {% for p in company.position%}
                     {{
-                        position( p.name, p.s_date, p.e_date, p.desc)
+                        ml.position( p.name, p.s_date, p.e_date, p.desc)
                     }}
                 {% endfor%}
                 
