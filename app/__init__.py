@@ -10,18 +10,18 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Temporary images. TODO replace with actual images.
-    photos = ['David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg', 'David Benjamin.jpg']
+    photos = ['hamster.png', 'hamster.png', 'hamster.png', 'hamster.png', 'hamster.png']
     locations = [
-        {"name": "New York", "lat": 40.7128, "lng": -74.0060, "visited_by": "David"},
+        {"name": "New York", "lat": 40.7128, "lng": -74.0060, "visited_by": "Hamster"},
         {"name": "San Francisco", "lat": 37.7749, "lng": -122.4194, "visited_by": "Ebony"},
         {"name": "Pennsylvania", "lat": 13.847161255761124, "lng":100.39281811647348 , "visited_by": "Ebony"},
-        {"name": "Boston", "lat": 42.3601, "lng": -71.0589, "visited_by": "David"},
+        {"name": "Boston", "lat": 42.3601, "lng": -71.0589, "visited_by": "Hamster"},
     ]
 
     # TODO fill in actual about sections.
     abouts = [
         {
-            'title': 'About David Benjamin',
+            'title': 'About Hamster',
             'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
         },
         {
