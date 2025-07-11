@@ -141,7 +141,7 @@ body {
     padding: 2rem;
 }
 
-.about, .hobby {
+.about, .hobby, .form, .post {
     flex: 1 1 300px;
     max-width: 500px;
     background-color: #f8f8f8;

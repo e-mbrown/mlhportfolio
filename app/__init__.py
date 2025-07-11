@@ -72,12 +72,7 @@ def post_timeline_post():
 
 @app.route('/api/timeline_post', methods=['GET'])
 def get_timeline_post():
-    return {
-        'timeline_posts': [
-            model_to_dict(p)
-            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
-        ]
-    }
+    return getPosts()
 
 # Not right but on the right track
 @app.route('/api/timeline_post/<name>', methods=['DELETE'])
@@ -85,3 +80,19 @@ def rm_timeline_post(name):
     query = TimelinePost.delete().where(TimelinePost.name == name)
     res = query.execute()
     return f"{res} records deleted.\n"
+
+@app.route('/timeline')
+def timeline():
+    posts = getPosts()
+    return render_template('timeline.html', title="Timeline", posts=posts['timeline'])
+
+
+
+# 
+def getPosts():
+    return {
+        'timeline': [
+            model_to_dict(p)
+            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+        ]
+    }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Personal Portfolio">
+    <meta property="og:description" content="My Personal Portfolio">
+    <meta property="og:url" content="{{ url }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
+    <link rel="stylesheet" href="./static/styles/style.css">
+    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% import 'macro.jinja' as ml %}
+   <header class="nav-bar">
+        <div class="nav-content">
+            <a href="/">
+                <div class="nav-logo">
+                    <img src="./static/img/logo.svg" />
+                </div>
+            </a>
+        </div>
+        {{ml.menu()}}
+    </header>
+
+    <div class="form_container">
+        <div class="form">
+            <form id="tlf">
+                <input type="text" name="name">
+                <input type="email" name="email">
+                <input type="text" name="content">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
+        <div class="post_container">
+            <div id="insert"></div>
+            {% for p in posts %}
+                <div class="post">
+                    <h2>{{ p.name }}</h2>
+                    <i>{{ p.email }}</i>
+                    <p>{{ p.content}}</p>
+                 </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById('tlf')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            const body = new FormData(form)
+
+            fetch(`/api/timeline_post`, {
+                method: 'POST',
+                body: body,
+            })
+            .then(res => res.json())
+            .then(data => {
+                nPost = `
+                <div class="post">
+                    <h2>${data.name }</h2>
+                    <i>${data.email}</i>
+                    <p>${data.content}</p>
+                 </div>
+                `
+                 nPost = nPost + document.getElementById('insert').innerHTML
+                 document.getElementById('insert').innerHTML = nPost
+            })
+        })
+    </script>
+</body>
+</html>
