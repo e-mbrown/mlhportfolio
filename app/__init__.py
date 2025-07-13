@@ -43,7 +43,7 @@ def index():
     # TODO fill in actual about sections.
     abouts = [
         {
-            'title': 'About Hamster',
+            'title': 'About Big Hammie',
             'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
         },
         {
