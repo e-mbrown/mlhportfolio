@@ -9,13 +9,17 @@ from playhouse.shortcuts import model_to_dict
 load_dotenv()
 app = Flask(__name__)
 
-db = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306
-)
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    db = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
+else:
+    db = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306,
+    )
 
 class TimelinePost(Model):
     name = CharField()
@@ -63,9 +67,15 @@ def hobbies():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_timeline_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    name = request.form.get('name')
+    email = request.form.get('email')
+    content = request.form.get('content')
+    if not name or name == "":
+        return "Invalid name,", 400
+    if not content or content == "":
+        return "Invalid content,", 400
+    if not email or '@' not in email:
+        return "Invalid email,", 400
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
