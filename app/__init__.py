@@ -36,7 +36,7 @@ db.create_tables([TimelinePost])
 @app.route('/')
 def index():
     # Temporary images. TODO replace with actual images.
-    photos = ['hamster.png', 'hamster.png', 'hamster.png', 'hamster.png', 'hamster.png']
+    photos = ['hamster.png', 'hamster.png']
     locations = [
         {"name": "New York", "lat": 40.7128, "lng": -74.0060, "visited_by": "Hamster"},
         {"name": "San Francisco", "lat": 37.7749, "lng": -122.4194, "visited_by": "Ebony"},
@@ -48,11 +48,11 @@ def index():
     abouts = [
         {
             'title': 'About Big Hammie',
-            'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
+            'description': 'Consectetur adipiscing elit. Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
         },
         {
             'title': 'About Ebony Brown',
-            'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
+            'description': 'Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
         }
     ]
     return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), photos=photos, abouts=abouts, locations=locations)
