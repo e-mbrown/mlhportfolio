@@ -44,18 +44,7 @@ def index():
         {"name": "Boston", "lat": 42.3601, "lng": -71.0589, "visited_by": "Hamster"},
     ]
 
-    # TODO fill in actual about sections.
-    abouts = [
-        {
-            'title': 'About Big Hammie',
-            'description': 'Consectetur adipiscing elit. Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
-        },
-        {
-            'title': 'About Ebony Brown',
-            'description': 'Aenean commodo mi vel mauris iaculis placerat. Maecenas suscipit ipsum massa. Proin.'
-        }
-    ]
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), photos=photos, abouts=abouts, locations=locations)
+    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"), photos=photos, abouts=testdata.aboutData, locations=locations)
 
 @app.route('/resume')
 def resume():

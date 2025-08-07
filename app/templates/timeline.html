@@ -7,72 +7,101 @@
     <meta property="og:description" content="My Personal Portfolio">
     <meta property="og:url" content="{{ url }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&display=swap" rel="stylesheet">
 
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
-    <link rel="stylesheet" href="./static/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Quintessential&display=swap" rel="stylesheet">
+
+
+    <link lang='sass' rel="stylesheet" href="./static/dist/tailwind.css">
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
     <title>{{ title }}</title>
 </head>
-<body>
+<body class="bg-white text-gray-900">
     {% import 'macro.jinja' as ml %}
-   <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
+    
+    <div class="pt-6 pb-4 flex justify-center bg-blue-500">
+        <a href="/" class="block w-auto h-16">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" class="h-full w-auto mx-auto" />
+        </a>
+    </div>
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="text-lg font-semibold text-gray-800">
+            {{ ml.menu() }}
+            </div>
+
+            <nav class="text-sm font-medium text-gray-700">
+                <ul class="flex space-x-6">
+                    {{ ml.menuIt() }}
+                </ul>
+            </nav>
         </div>
-        {{ml.menu()}}
     </header>
 
-    <div class="form_container">
-        <div class="form">
-            <form id="tlf">
-                <input type="text" name="name">
-                <input type="email" name="email">
-                <input type="text" name="content">
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        
-        <div class="post_container">
-            <div id="insert"></div>
-            {% for p in posts %}
-                <div class="post">
-                    <h2>{{ p.name }}</h2>
-                    <i>{{ p.email }}</i>
-                    <p>{{ p.content}}</p>
-                 </div>
-            {% endfor %}
-        </div>
-    </div>
-    <script>
-        const form = document.getElementById('tlf')
-        form.addEventListener('submit', (e) => {
-            e.preventDefault()
-            const body = new FormData(form)
+    <main class="max-w-3xl mx-auto px-6 py-12"></main>
+        <section class="mb-12">
+            <h1 class="text-2xl font-bold mb-6">Timeline</h1>
+            <form id="tlf" class="space-y-4 bg-gray-50 p-6 rounded-lg shadow">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" name="name" id="name" class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" name="email" id="email" class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                    <input type="text" name="content" id="content" class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                    Submit
+                </button>
+        </form>
+        </section>
+    
+        <section>
+            <h2 class="text-2xl font-bold mb-6">Recent Posts</h2>
 
-            fetch(`/api/timeline_post`, {
-                method: 'POST',
-                body: body,
-            })
-            .then(res => res.json())
-            .then(data => {
-                nPost = `
-                <div class="post">
-                    <h2>${data.name }</h2>
-                    <i>${data.email}</i>
-                    <p>${data.content}</p>
-                 </div>
-                `
-                 nPost = nPost + document.getElementById('insert').innerHTML
-                 document.getElementById('insert').innerHTML = nPost
-            })
+            <div id="insert" class="space-y-6 mb-6"></div>
+
+            {% for p in posts %}
+                <div class="post bg-white border border-gray-200 rounded-lg shadow p-6 space-y-2">
+                <h3 class="text-xl font-semibold">{{ p.name }}</h3>
+                <p class="text-sm text-gray-500 italic">{{ p.email }}</p>
+                <p class="text-gray-700">{{ p.content }}</p>
+                </div>
+            {% endfor %}
+        </section>
+
+    </main>
+
+  <!-- Form Submit Script -->
+  <script>
+    const form = document.getElementById('tlf')
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const body = new FormData(form)
+
+      fetch(`/api/timeline_post`, {
+        method: 'POST',
+        body: body,
+      })
+        .then(res => res.json())
+        .then(data => {
+          const newPost = `
+            <div class="post bg-white border border-gray-200 rounded-lg shadow p-6 space-y-2">
+              <h3 class="text-xl font-semibold">${data.name}</h3>
+              <p class="text-sm text-gray-500 italic">${data.email}</p>
+              <p class="text-gray-700">${data.content}</p>
+            </div>
+          `
+          const container = document.getElementById('insert')
+          container.innerHTML = newPost + container.innerHTML
+          form.reset()
         })
-    </script>
+    })
+  </script>
 </body>
 </html>

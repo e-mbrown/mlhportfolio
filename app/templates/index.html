@@ -10,11 +10,14 @@
     <meta property="og:url" content="{{ url }}">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
 
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Quintessential&display=swap" rel="stylesheet">
+
+
+    <link lang='sass' rel="stylesheet" href="./static/dist/tailwind.css">
+    
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -24,45 +27,70 @@
     <title>{% block title %}Portfolio{% endblock %}</title>
 </head>
 
-<body>
+<body class="bg-white text-gray-900">
     {% import 'macro.jinja' as ml %}
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
+
+    <!-- Header -->
+    <div class="pt-6 pb-4 flex justify-center bg-blue-500">
+        <a href="/" class="block w-auto h-16">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" class="h-full w-auto mx-auto" />
+        </a>
+    </div>
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="text-lg font-semibold text-gray-800">
+            {{ ml.menu() }}
+            </div>
+
+            <nav class="text-sm font-medium text-gray-700">
+                <ul class="flex space-x-6">
+                    {{ ml.menuIt() }}
+                </ul>
+            </nav>
         </div>
-        {{ml.menu()}}
     </header>
 
+    <!-- Main Content -->
     <main>
         {% block content %}
-        <section class="photos-wrapper">
-            <div class="photos">
-                {% for photo in photos %}
-                <img src="{{ url_for('static', filename='img/' + photo) }}" alt="Photo {{ loop.index }}" />
-                {% endfor %}
-            </div>
-        </section>
-          <section class="about-container">
+
+        <!-- About Section -->
+        <section class="bg-gray-50 py-16 px-4 text-center">
             {% for about in abouts %}
-                <div class="about">
-                    <h2>{{ about.title }}</h2>
-                    <p>{{ about.description }}</p>
-                </div>
+            <div class="max-w-2xl mx-auto mb-12">
+                <p class="text-3xl font-semibold mb-4">{{ about.description }}</p>
+                <p class="text-xl text-gray-600 italic">{{ about.interest }}</p>
+            </div>
             {% endfor %}
         </section>
-        <section class="map-wrapper">
-            <h1>Where we've been</h1>
-            <div id="map">
-                <!-- Inject location data -->
-                <script>
-                    window.MAP_LOCATIONS = {{ locations | tojson }};
-                </script>
-                <script src="{{ url_for('static', filename='map.js') }}"></script>
+
+        <!-- Photos Section -->
+        <section class="py-16 px-4 bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-center">
+                    {% for photo in photos %}
+                    <img src="{{ url_for('static', filename='img/' + photo) }}" alt="Photo {{ loop.index }}" class="rounded-lg shadow" />
+                    {% endfor %}
+                </div>
+                <p class="italic text-center text-gray-700">Based in Virginia</p>
             </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="py-16 px-4 bg-gray-50">
+            <div class="flex flex-col justify-center max-w-5xl mx-auto text-center">
+                <h2 class="text-2xl font-bold mb-4">Where We've Been</h2>
+                <div id="map" class="flex justify-center h-96 border rounded-lg shadow-md"></div>
+            </div>
+
+            <!-- Inject location data -->
+            <script>
+                window.MAP_LOCATIONS = {{ locations | tojson }};
+            </script>
+            <script src="{{ url_for('static', filename='map.js') }}"></script>
+        </section>
+
         {% endblock %}
     </main>
 </body>

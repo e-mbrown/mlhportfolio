@@ -20,15 +20,10 @@ class AppTestCase(unittest.TestCase):
         assert '<meta charset="utf-8">' in html
         assert '<meta name="viewport"' in html
         assert '<meta property="og:title" content="Personal Portfolio">' in html
-
-        # check sections and img/css
-        assert 'class="nav-bar"' in html
-        assert 'class="photos-wrapper"' in html
-        assert 'class="about-container"' in html
-        assert 'class="map-wrapper"' in html
-
-        assert '<img src="./static/img/logo.svg" />' in html
-        assert "./static/styles/main.css" in html
+        
+        # Change test because tailwind
+        # assert '<img src="./static/img/logo.svg" />' in html
+        assert "./static/dist/tailwind.css" in html
 
     def test_timeline(self):
         response = self.client.get("/api/timeline_post")

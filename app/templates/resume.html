@@ -7,51 +7,68 @@
     <meta property="og:description" content="My Personal Portfolio">
     <meta property="og:url" content="{{ url }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&display=swap" rel="stylesheet">
 
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Quintessential&display=swap" rel="stylesheet">
+    <link lang='sass' rel="stylesheet" href="./static/dist/tailwind.css">
     <link rel="stylesheet" href="./static/styles/style.css">
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
     <title>{{ title }}</title>
 </head>
-<body>
+<body class="bg-white text-gray-900" >
     {% import 'macro.jinja' as ml %}
-   <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
-        </div>
-        {{ml.menu()}}
-    </header> 
-
-    <div class="work">
-        <h1> Experience </h1>
-        {% for company in exp %}
-            <div class="head">
-                <h3>{{company.name}}</h3>
-                <h4>{{company.location}}</h4>
-            </div>
-                {% for p in company.position%}
-                    {{
-                        ml.position( p.name, p.s_date, p.e_date, p.desc)
-                    }}
-                {% endfor%}
-                
-        {% endfor %}
-    </div>    
-    <div class="edu">
-        <h1> Education </h1>
-        {% for school in edu %}
-            <div class="head">
-                <h4>{{school.name}} - {{school.degree}}</h4>
-                <p class="i">{{school.date}}</p>
-            </div>
-        {% endfor %}
+   
+    <div class="pt-6 pb-4 flex justify-center bg-blue-500">
+    <a href="/" class="block w-auto h-16">
+      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" class="h-full w-auto mx-auto" />
+    </a>
     </div>
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="text-lg font-semibold text-gray-800">
+            {{ ml.menu() }}
+            </div>
+
+            <nav class="text-sm font-medium text-gray-700">
+                <ul class="flex space-x-6">
+                    {{ ml.menuIt() }}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <section class="mb-12">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 border-b pb-2">Experience</h1>
+
+        {% for company in exp %}
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                <h3 class="text-xl font-semibold text-gray-900">{{ company.name }}</h3>
+                <h4 class="text-sm text-gray-600">{{ company.location }}</h4>
+            </div>
+
+            {% for p in company.position %}
+            <div class="ml-4 border-l-2 border-blue-500 pl-4 mb-4">
+                {{ ml.position(p.name, p.s_date, p.e_date, p.desc) }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Education Section -->
+    <section>
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 border-b pb-2">Education</h1>
+        {% for school in edu %}
+        <div class="mb-6">
+            <h4 class="text-lg font-semibold text-gray-900">{{ school.name }} - {{ school.degree }}</h4>
+            <p class="text-sm text-gray-600 italic">{{ school.date }}</p>
+        </div>
+        {% endfor %}
+    </section>
+
+    </main>
 </body>
 </html>

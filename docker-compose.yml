@@ -1,4 +1,3 @@
-version: '3'
 services:
   myport:
     container_name: myport
@@ -23,6 +22,7 @@ services:
       - .env
     volumes:
       - mydatabase:/var/lib/mysql
+      - ./init_scripts:/docker-entrypoint-initdb.d
 
 volumes:
   mydatabase:

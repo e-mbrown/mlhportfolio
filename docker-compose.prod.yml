@@ -1,4 +1,3 @@
-version: '3'
 services:
   myport:
     container_name: myport
@@ -17,7 +16,7 @@ services:
       - .env
     volumes:
       - mydatabase:/var/lib/mysql
-
+      - ./init_script:/docker-entrypoint-initdb.d
   nginx:
     container_name: nginx
     image: jonasal/nginx-certbot
