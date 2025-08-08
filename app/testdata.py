@@ -1,7 +1,7 @@
 aboutData = [
         {
             'description': 'My name is Ebony. I\'m a developer who has an interest in language intepreters, databases and making games. I love the process of building applications and tackling new problems.',
-            'interest': 'I\'m interested in backend web development and devOps.'
+            'interest': 'I\'m interested in Backend Web development and DevOps.'
         }
 ]
 

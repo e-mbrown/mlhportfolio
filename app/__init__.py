@@ -36,7 +36,7 @@ db.create_tables([TimelinePost])
 @app.route('/')
 def index():
     # Temporary images. TODO replace with actual images.
-    photos = ['hamster.png', 'hamster.png']
+    photos = ['hamster.png']
     locations = [
         {"name": "New York", "lat": 40.7128, "lng": -74.0060, "visited_by": "Hamster"},
         {"name": "San Francisco", "lat": 37.7749, "lng": -122.4194, "visited_by": "Ebony"},
