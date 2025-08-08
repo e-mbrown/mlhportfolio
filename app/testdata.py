@@ -7,7 +7,7 @@ aboutData = [
 
 workData = [
     {
-        "name":" BingBong Inc",
+        "name":" BingBong & Co",
         "location":"Remote",
         "position": [
             {   
