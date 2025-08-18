@@ -24,9 +24,25 @@ jobs:
                 END
               env:
                 SSH_USER:  ${{ secrets.SSH_USER }}
-                SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY }}
+                SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
                 SSH_IP: ${{ secrets.SSH_IP }}
             - name: Redeploy on VPS
               run: |
-                ssh my-vps 'cd ~/mlhportfolio && chmod +x ./scripts/redeploy.sh \
-                && ./scripts/redeploy.sh'
+                ssh my-vps << 'EOF'
+                cd ~/mlhportfolio 
+                chmod +x ./scripts/redeploy.sh
+                ./scripts/redeploy.sh
+                docker ps -f 'name=mysql' -f 'name=myport' -f 'name=nginx'
+                EOF
+            - name: Send Notification
+              run: |
+                curl -s -X POST "$DISCORD_WEBHOOK" -H "Content-Type:application/json" \
+                -d '{
+                  "embeds": [{
+                    "Title": "Port Deployment",
+                    "Desc": "Docker Container deployed",
+                    "footer": {"text": "Origin: Github"}
+                    }]
+                }'
+              env:
+                DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
